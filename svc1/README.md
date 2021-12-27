@@ -1,4 +1,22 @@
 # Build
+## Jar
+```
+./gradlew clean build
+```
+Validate:
+```
+java -jar build/libs/svc1-0.0.1-SNAPSHOT.jar
+```
+```
+curl localhost:8080/hello | jq
+```
+### DAPR
+```
+dapr run --app-id dapr-svc1 --app-port 8080 --dapr-http-port 9090 -- java -jar build/libs/svc1-0.0.1-SNAPSHOT.jar
+```
+```
+curl localhost:9090/v1.0/invoke/dapr-svc1/method/hello | jq
+```
 ## Docker image with tag on the local registry
 ```
 ./gradlew clean bootBuildImage --imageName=registry.localhost:5000/svc1
