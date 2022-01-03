@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: eureka-svc2
+server:
+  port: 8081
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
