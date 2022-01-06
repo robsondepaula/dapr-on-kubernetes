@@ -1,6 +1,6 @@
-# Spring Cloud Stream
+# Dapr pub/sub
 
-Experimenting the Spring Cloud Stream (with RabbitMQ).
+Experimenting the Dapr pub/sub (with RabbitMQ).
 
 ## RabbitMQ
 ```
