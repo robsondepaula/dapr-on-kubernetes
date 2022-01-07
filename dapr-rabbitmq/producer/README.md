@@ -12,3 +12,7 @@ curl -X POST http://localhost:9091/v1.0/invoke/dapr-producer/method/produce \
    -H "Content-Type: application/json" \
    -d '{"productId": 123456, "quantity": 100}'
 ```
+Or:
+```
+dapr publish --publish-app-id dapr-producer --pubsub rabbitmq --topic ardp-topic --data '{"productId": 123456, "quantity": 100}'
+```
