@@ -16,3 +16,6 @@ Validate:
 curl localhost:9091/v1.0/invoke/dapr-svc2/method/remote-hello | jq
 ```
 This will request the side-car of dapr-svc2 to communicate with the side-car in sv1 and complete the remote service invocation.
+
+## Zipkin
+Each sidecar populates the self-hosted Zipkin by default. Check the tracing by visiting http://localhost:9411/zipkin.
