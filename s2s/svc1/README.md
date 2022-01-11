@@ -65,3 +65,24 @@ And finally:
 curl localhost:8082/hello
 ```
 For a refresher about exposing services on k3d, check  https://k3d.io/v5.2.2/usage/exposing_services/.
+
+# Container build
+## Dockerfile
+Multilayered build:
+```
+docker build . -t registry.localhost:5000/svc1
+```
+Push to local registry:
+```
+docker push registry.localhost:5000/svc1
+```
+Validate:
+```
+docker run -d -p 8080:8080 --name svc1 registry.localhost:5000/svc1
+```
+```
+curl localhost:8080/hello
+```
+```
+docker stats
+```
