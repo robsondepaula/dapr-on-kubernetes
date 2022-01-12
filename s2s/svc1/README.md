@@ -17,7 +17,27 @@ dapr run --app-id dapr-svc1 --app-port 8080 --dapr-http-port 9090 -- java -jar b
 ```
 curl localhost:9090/v1.0/invoke/dapr-svc1/method/hello | jq
 ```
-## Docker image with tag on the local registry
+# Container build
+## Dockerfile
+Multilayered build:
+```
+docker build . -t registry.localhost:5000/svc1
+```
+Push to local registry:
+```
+docker push registry.localhost:5000/svc1
+```
+Validate:
+```
+docker run -d -p 8080:8080 --name svc1 registry.localhost:5000/svc1
+```
+```
+curl localhost:8080/hello
+```
+```
+docker stats
+```
+## Docker image built with Spring buildpack with tag on the local registry
 ```
 ./gradlew clean bootBuildImage --imageName=registry.localhost:5000/svc1
 ```
@@ -40,13 +60,19 @@ Stop the running container:
 ```
 docker ps | grep registry.localhost:5000/svc1 | awk '{print $1}' | xargs docker stop
 ```
+
 # Deploy to k8s
+If you do not have a local k8s cluster, check this [suggestion](../README.md).
 ```
 kubectl apply -f manifests/deployment.yaml
 ```
 Wait for svc1 pod to reach Running status:
 ```
 kubectl get pods -w
+```
+If the pod status is not Running check the logs, like so:
+```
+kubectl logs svc1-dep-68667b98cf-qxt6z
 ```
 Deploy the NodePort service:
 ```
@@ -62,27 +88,5 @@ svc1-svc     NodePort    10.43.179.254   <none>        2346:30080/TCP   8s
 ```
 And finally:
 ```
-curl localhost:8082/hello
-```
-For a refresher about exposing services on k3d, check  https://k3d.io/v5.2.2/usage/exposing_services/.
-
-# Container build
-## Dockerfile
-Multilayered build:
-```
-docker build . -t registry.localhost:5000/svc1
-```
-Push to local registry:
-```
-docker push registry.localhost:5000/svc1
-```
-Validate:
-```
-docker run -d -p 8080:8080 --name svc1 registry.localhost:5000/svc1
-```
-```
-curl localhost:8080/hello
-```
-```
-docker stats
+curl localhost:30080/hello
 ```

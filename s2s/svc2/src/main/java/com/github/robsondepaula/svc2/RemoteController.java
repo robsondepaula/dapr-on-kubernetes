@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RestController
 public class RemoteController {
 
-    @Value("${baseUrl}")
+    @Value("${base.url}")
     private String baseUrl;
     
     private WebClient client = WebClient.create();
