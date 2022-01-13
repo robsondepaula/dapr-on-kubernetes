@@ -17,7 +17,21 @@ docker network connect k3d-k3s-default registry.localhost
 https://github.com/rancher/k3d/issues/359
 
 # Plain Spring on k8s
-Deploy [svc1](./svc1/README.md) and [svc2](./svc2/README.md) to the kubernetes cluster and validate.
+Follow the deployment to k8s sections in [svc1](./svc1/README.md) and [svc2](./svc2/README.md) to get each service deployed to the kubernetes cluster.
 
 # With dapr
-Deploy [dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to the cluster, then [svc1](./svc1/README.md)(if not done already) and [dapr-svc2](./dapr-svc2/README.md), validate.
+Deploy [dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to the cluster, when finished, setup [Zipkin in k8s mode](https://docs.dapr.io/operations/monitoring/tracing/setup-tracing/).
+
+After completing the guides above, proceed with [dapr-svc1](./dapr-svc1/README.md) and [dapr-svc2](./dapr-svc2/README.md).
+
+## Zipking dashboard
+View tracing data by:
+```
+kubectl port-forward svc/zipkin 9411:9411
+```
+
+## Dapr dashboard
+The dapr dashboard can be used to get an overview of what is running:
+```
+dapr dashboard -k -p 9999
+```

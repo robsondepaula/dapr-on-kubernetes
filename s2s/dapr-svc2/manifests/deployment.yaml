@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dapr-svc2-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dapr-svc2-app
+  template:
+    metadata:
+      labels:
+        app: dapr-svc2-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "dapr-svc2"
+        dapr.io/app-port: "8081"
+        dapr.io/config: "zipkin"
+    spec:
+      containers:
+        - name: dapr-svc2-container
+          image: registry.localhost:5000/dapr-svc2
