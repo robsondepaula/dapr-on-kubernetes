@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-svc1-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-svc1-app
+  template:
+    metadata:
+      labels:
+        app: eureka-svc1-app
+    spec:
+      containers:
+        - name: eureka-svc1-container
+          image: registry.localhost:5000/eureka-svc1
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: ${EUREKA_URI:http://eureka-server-service.default.svc.cluster.local:2349/eureka}

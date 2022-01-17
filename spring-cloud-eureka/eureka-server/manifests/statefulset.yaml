@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eureka-sfs
+spec:
+  serviceName: eureka-server-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-server-app
+  template:
+    metadata:
+      labels:
+        app: eureka-server-app
+    spec:
+      containers:
+      - name: eureka-server-container
+        image: registry.localhost:5000/eureka-server
