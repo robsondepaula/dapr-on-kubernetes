@@ -33,3 +33,15 @@ service/definition         ClusterIP   10.43.146.64   <none>        5672/TCP,156
 NAME                                 READY   AGE
 statefulset.apps/definition-server   1/1     56s
 ```
+
+## Retrieving RabbitMQ credentials and dashboard access
+```
+kubectl -n default get secret definition-default-user -o jsonpath="{.data.username}" | base64 --decode
+```
+```
+kubectl -n default get secret definition-default-user -o jsonpath="{.data.password}" | base64 --decode
+```
+```
+kubectl port-forward service/definition 50524:15672
+```
+Visit [http://localhost:50524/](http://localhost:50524/) and use the credentials.
