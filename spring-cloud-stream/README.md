@@ -9,7 +9,7 @@ docker-compose up -d
 Visit http://localhost:15672/ and login with the user and password you defined in the .env file to gain access to the management console.
 
 # Kubernetes
-Use the [RabbitMQ Cluster Operator(https://www.rabbitmq.com/kubernetes/operator/using-operator.html) to properly deploy the RabbitMQ into the k8s cluster:
+Use the [RabbitMQ Cluster Operator](https://www.rabbitmq.com/kubernetes/operator/using-operator.html) to properly deploy the RabbitMQ into the k8s cluster:
 ```
 kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml"
 ```
