@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dapr-producer-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dapr-producer-app
+  template:
+    metadata:
+      labels:
+        app: dapr-producer-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "dapr-rmq-producer"
+        dapr.io/app-port: "8080"
+        dapr.io/config: "zipkin"
+    spec:
+      containers:
+        - name: dapr-producer-container
+          image: registry.localhost:5000/dapr-rmq-producer
+          env:
+            - name: SPRING_RABBITMQ_HOST
+              value: definition.default.svc.cluster.local
+            - name: SPRING_RABBITMQ_USERNAME
+              value: default_user_lL8bFSvEU6CjBu-EQRw
+            - name: SPRING_RABBITMQ_PASSWORD
+              value: nzjc6Mu_J_VlcFmOKE7A5swcI_edozHO
+          imagePullPolicy: Always

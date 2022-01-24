@@ -1,0 +1,13 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: rabbitmq
+  namespace: default
+spec:
+  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+    - name: host
+      value: "amqp://default_user_lL8bFSvEU6CjBu-EQRw:nzjc6Mu_J_VlcFmOKE7A5swcI_edozHO@definition.default.svc.cluster.local:5672"
+    - name: requeueInFailure
+      value: true

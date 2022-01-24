@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dapr-consumer-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dapr-consumer-app
+  template:
+    metadata:
+      labels:
+        app: dapr-consumer-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "dapr-rmq-consumer"
+        dapr.io/app-port: "8081"
+        dapr.io/config: "zipkin"
+    spec:
+      containers:
+        - name: dapr-consumer-container
+          image: registry.localhost:5000/dapr-rmq-consumer
+          imagePullPolicy: Always
