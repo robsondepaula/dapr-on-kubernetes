@@ -1,3 +1,5 @@
+# Self hosted
+Check DAPR section on [svc1](../svc1/README.md)
 
 # Deploy to k8s
 Check the necessary [annotations](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-overview/) to make this [deployment](./manifests/deployment.yaml) "dapr enabled".

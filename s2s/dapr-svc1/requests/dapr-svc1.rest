@@ -1,0 +1,1 @@
+GET http://localhost:9090/v1.0/invoke/dapr-svc1/method/hello

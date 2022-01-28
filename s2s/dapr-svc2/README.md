@@ -1,6 +1,6 @@
 # Dependency
 ## Local validation
-Requires [svc1](../svc1/README.md) up and running on DAPR (self-hosted).
+Requires [dapr-svc1](../dapr-svc1/README.md) up and running on DAPR (self-hosted mode).
 
 # DAPR
 Build:
