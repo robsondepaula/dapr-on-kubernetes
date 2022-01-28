@@ -1,0 +1,8 @@
+
+POST http://localhost:9092/v1.0/publish/rabbitmq/ardp-topic
+content-Type: application/json
+
+{
+    "productId": 123456, 
+    "quantity": 100
+}

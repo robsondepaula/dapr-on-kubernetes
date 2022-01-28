@@ -7,6 +7,8 @@
 dapr run --app-id dapr-producer --app-port 8080 --dapr-http-port 9091 --components-path ./dapr-components -- java -jar build/libs/producer-0.0.1-SNAPSHOT.jar
 ```
 3. Validate:
+Use the [requests](./requests/producer.rest) file for an isolated test.
+
 ```
 curl -X POST http://localhost:9091/v1.0/invoke/dapr-producer/method/produce \
    -H "Content-Type: application/json" \

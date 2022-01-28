@@ -1,0 +1,16 @@
+
+POST http://localhost:8989/publish 
+content-Type: application/json
+
+{
+    "productId": 123456, 
+    "quantity": 100
+}
+
+POST http://localhost:30003/publish
+content-Type: application/json
+
+{
+    "productId": 123456, 
+    "quantity": 100
+}

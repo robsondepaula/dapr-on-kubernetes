@@ -1,0 +1,16 @@
+
+POST http://localhost:9091/v1.0/invoke/dapr-producer/method/produce
+content-Type: application/json
+
+{
+    "productId": 123456, 
+    "quantity": 100
+}
+
+POST http://localhost:30004/produce
+content-Type: application/json
+
+{
+    "productId": 123456, 
+    "quantity": 100
+}
