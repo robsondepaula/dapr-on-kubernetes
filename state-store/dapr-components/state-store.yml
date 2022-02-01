@@ -1,0 +1,17 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: mongostore
+spec:
+  type: state.mongodb
+  version: v1
+  metadata:
+    - name: host
+      value: "localhost:27017"
+    - name: username
+      value: "user"
+    - name: password
+      value: "S3cr3t"
+    - name: databaseName
+      value: "admin"
+    

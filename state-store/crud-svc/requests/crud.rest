@@ -1,15 +1,12 @@
-GET http://localhost:8000/items/
-
-###
 
 POST http://localhost:8000/items
 content-type: application/json
 
 {
-    "name": "bread",
-    "price": 4.12
+    "name": "cinnamon roll",
+    "price": 6.99
 }
 
 ###
 
-GET http://localhost:8000/items/fcda7632-b9ab-4539-ba41-86d31567d94c
+GET http://localhost:8000/items/bread

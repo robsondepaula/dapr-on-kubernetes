@@ -1,0 +1,5 @@
+# volume mounts
+.docker
+
+# environment variables
+.env

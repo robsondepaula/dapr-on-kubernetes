@@ -1,28 +1,29 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import uuid
+import os
+from fastapi import Request, FastAPI
+import httpx
+
+dapr_port = os.getenv("DAPR_HTTP_PORT")
+if dapr_port == None:
+    print("This script needs to run with dapr")
+    exit()
+
+state_url = f"http://localhost:{dapr_port}/v1.0/state/mongostore"
 
 app = FastAPI()
 
-class Item(BaseModel):
-    name: str
-    price: float
-
-fake_db = {}
-
 @app.get("/items")
 async def read_item():
-    return fake_db
+    r = httpx.get(f"{state_url}/")
+    return r.content
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: uuid.UUID):
-    if item_id in fake_db:
-        return fake_db[item_id]
-    else:
-        raise HTTPException(status_code=404, detail="Item with given id does not exists")
+@app.get("/items/{item_key}")
+async def read_item(item_key: str):
+    r = httpx.get(f"{state_url}/{item_key}")
+    return r.content
 
 @app.post("/items")
-async def create_item(item: Item):
-    key = uuid.uuid4()
-    fake_db[key] = item
-    return key
+async def create_item(request: Request):
+    body = await request.json()
+    dapr_state = f'[ {{ "key": "bread", "value": "{body}" }} ]'
+    r = httpx.post(f"{state_url}", data=dapr_state)
+    return r.content
