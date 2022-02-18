@@ -9,7 +9,7 @@ To setup a local cluster with [k3d](https://k3d.io/v5.2.2/#installation), you ca
 On the subfolders, you can find various "micro-services" (pun intended) used as scaffolding for learning Spring, DAPR, FastApi, etc..
 
 ## .rest files
-If it is the first time you see a ".rest" file, it is one of the supported file extensions for the excelent [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+If it is the first time you see a ".rest" file, it is one of the supported file extensions for the excellent [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
 ## DAPR
 ### Zipkin
