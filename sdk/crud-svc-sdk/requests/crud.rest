@@ -1,0 +1,12 @@
+
+POST http://localhost:8000/items
+content-type: application/json
+
+{
+    "name": "cinnamon roll",
+    "price": 6.99
+}
+
+###
+
+GET http://localhost:8000/items/bread
