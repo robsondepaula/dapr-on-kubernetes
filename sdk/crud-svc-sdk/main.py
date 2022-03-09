@@ -1,29 +1,20 @@
-import os
 from fastapi import Request, FastAPI
-import httpx
-
-dapr_port = os.getenv("DAPR_HTTP_PORT")
-if dapr_port == None:
-    print("This script needs to run with dapr")
-    exit()
-
-state_url = f"http://localhost:{dapr_port}/v1.0/state/mongostore"
+from dapr.clients import DaprClient
 
 app = FastAPI()
 
-@app.get("/items")
-async def read_item():
-    r = httpx.get(f"{state_url}/")
-    return r.content
+STATE_STORE_NAME = "mongostore"
 
 @app.get("/items/{item_key}")
 async def read_item(item_key: str):
-    r = httpx.get(f"{state_url}/{item_key}")
-    return r.content
+    with DaprClient() as d:
+        data = d.get_state(store_name=STATE_STORE_NAME, key=f"{item_key}").data
+        return data
 
-@app.post("/items")
-async def create_item(request: Request):
+@app.post("/items/{item_key}")
+async def create_item(request: Request, item_key: str):
     body = await request.json()
-    dapr_state = f'[ {{ "key": "bread", "value": "{body}" }} ]'
-    r = httpx.post(f"{state_url}", data=dapr_state)
-    return r.content
+    with DaprClient() as d:
+        d.save_state(STATE_STORE_NAME, f"{item_key}", f"{body}") 
+        data = d.get_state(store_name=STATE_STORE_NAME, key=f"{item_key}").data
+        return data
