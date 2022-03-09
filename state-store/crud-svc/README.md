@@ -14,9 +14,8 @@ Install dependencies:
 ```
 pip install -r requirements.txt
 ```
-Run local server with hotreload:
+Run local server with with DAPR sidecar:
 ```
-uvicorn main:app --reload
+dapr run --app-id crud-svc --components-path ../dapr-components -- uvicorn main:app
 ```
-
 While running you can check [FastAPI's Open API docs](localhost:8000/docs)
